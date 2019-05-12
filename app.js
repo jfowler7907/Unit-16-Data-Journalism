@@ -1,15 +1,15 @@
 // @TODO: YOUR CODE HERE!
 
 //Canvas size
-var svgWidth = 760;
+var svgWidth = 600;
 var svgHeight = 400;
 
 //Create canvas margins
 var margin = {
-    top: 20,
-    right: 20,
-    bottom: 20,
-    left: 100
+    top: 70,
+    right: 70,
+    bottom: 70,
+    left: 70
   };
 
 var width = svgWidth - margin.left - margin.right;
@@ -89,7 +89,7 @@ d3.csv("data.csv")
     circlesGroup.on("click", function(data) {
         toolTip.show(data, this);
       })
-        // onmouseout event
+        //On mouse out event
         .on("mouseout", function(data, index) {
           toolTip.hide(data);
         });
@@ -104,7 +104,17 @@ d3.csv("data.csv")
         .text("Smokes");
   
       chartGroup.append("text")
-        .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+        .attr("transform", `translate(${width / 2}, ${height + margin.top -10})`)
         .attr("class", "axisText")
         .text("Age");
+
+      //Append a label to each data point
+      chartGroup .append("text")
+        .style("text-anchor", "middle")
+        .style("font-size", "12-px")
+        .data(smokeAge)
+        .enter()
+        .text(function(smokeAge) {
+            return data.abbr
+          });
     });
